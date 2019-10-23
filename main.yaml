@@ -1,0 +1,89 @@
+---
+include:
+  - intents.yml
+  - slots.yml
+  - tests.yml
+scenario:
+  name: 'Radio prova'
+  locale: 'it-IT'
+  category: EDUCATION_AND_REFERENCE
+  invocation: 'Radio prova'
+  examplePhrases:
+    - 'Alexa, apri Radio prova'
+  reprompt:
+    - "Non ho capito"
+    - "Cosa hai detto?"
+    - "Cosa?"  
+  steps:
+
+    - name: Initial step
+      actions:
+        - sendText: 'vuoi?'      
+            
+        - getInput:         
+      next:     
+        
+        si: radio            
+        aiutami: Help
+        exit: Exit
+        no: Exit
+        ferma: Pause
+        stop: Exit
+        AMAZON.PauseIntent: Pause
+        AMAZON.ResumeIntent: Resume
+        AMAZON.CancelIntent: Exit
+        AMAZON.StopIntent: Exit
+        AMAZON.HelpIntent: Help
+                                            
+      
+    - name: radio
+      input: true
+      actions:        
+        - alexa.play:
+            title: ''
+            subtitle: ''
+            url: 'https://www.myinstants.com/media/sounds/final-fantasy-vii-victory-fanfare-1.mp3?'
+
+            artwork: ''
+            
+            
+            
+
+    - name: Pause
+      entrypoint: true
+      actions:
+        - alexa.stop:
+            input: true
+          
+
+    - name: Resume
+      entrypoint: true
+      actions:       
+        - alexa.play:
+            input: true
+            title: ''
+            subtitle: ''
+            url: 'https://www.myinstants.com/media/sounds/final-fantasy-vii-victory-fanfare-1.mp3'
+            artwork: ''
+                     
+                      
+
+    - name: Exit
+      entrypoint: true
+      actions:
+        - alexa.stop:
+            input: true
+        - sendText: 'Torna ad ascoltare radio prova. Basta dire: "Alexa, apri radio prova"  per aprire di nuovo la skill.'              
+            
+            
+    - name: Help
+      entrypoint: true
+      actions:
+        - sendText: 'Con questa skill puoi ascoltare la diretta di radio prova. '             
+            
+        - getInput:
+        
+      next: radio
+        
+  
+        
