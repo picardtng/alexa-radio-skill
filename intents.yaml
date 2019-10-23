@@ -1,0 +1,6 @@
+---
+intents:
+  si:
+   - 'si'
+  no:
+   - 'no'
